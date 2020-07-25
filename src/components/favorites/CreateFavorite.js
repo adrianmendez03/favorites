@@ -1,7 +1,7 @@
 import React from 'react';
 
 const CreateFavorite = () => {
-    return <div>CreateFavorite</div>
+    return <div className="content">CreateFavorite</div>
 }
 
 export default CreateFavorite;

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const CreateUser = () => {
-    return <div>CreateUser</div>
+    return <div className="content">CreateUser</div>
 }
 
 export default CreateUser;
