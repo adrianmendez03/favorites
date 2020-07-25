@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Navbar from './Navbar';
+import FavoriteHome from './favorites/FavoriteHome';
 import FavoritesList from './favorites/FavoritesList';
 import EditFavorite from './favorites/EditFavorite';
 import CreateFavorite from './favorites/CreateFavorite';
@@ -15,7 +16,8 @@ const App = () => {
             <div className="grid-container">
                 <Navbar />
                 <br />
-                <Route path="/" exact component={FavoritesList} />
+                <Route path="/" exact component={FavoriteHome} />
+                <Route path="/view" exact component={FavoritesList} />
                 <Route path="/edit/:id" component={EditFavorite} />
                 <Route path="/create" component={CreateFavorite} />
                 <Route path="/user" component={CreateUser} />

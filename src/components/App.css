@@ -28,7 +28,7 @@ a:visited {
     height: 100vh;
     width: 100vw;
     display: grid;
-    grid-template: 75px repeat(5, 1fr) / repeat(5, 20%);
+    grid-template: 75px repeat(5, 1fr) / 20% 1fr 1fr 1fr 20%;
     background-color: #f7f7ff;
 }
 
@@ -46,7 +46,9 @@ a:visited {
 
 .content {
     grid-row: 2 / span 6;
-    grid-column: 1 / span 6;
+    grid-column: 2 / span 3;
+
+    margin-top: 5rem;
 }
 
 
@@ -88,3 +90,27 @@ a.nav_item:hover:before {
     transform: scaleX(1.15);
 }
 /* End of Navbar */
+
+/* Homepage */
+.intro {
+    margin: 2rem 0;
+    display: inline-block;
+}
+
+.intro h1 {
+    margin: 1rem 0;
+    border-bottom: 3px solid #474bb3;
+    border-radius: 2px;
+}
+
+.intro-content {
+    background-color: #fafaff;
+    width: 65%;
+    border-radius: 15px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, .25);
+}
+
+.intro-content p {
+    padding: 1rem;
+}
+/* End of Homepage */
