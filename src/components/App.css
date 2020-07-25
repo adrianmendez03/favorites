@@ -1,0 +1,27 @@
+html, body {
+    height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+}
+
+body {
+    margin: 0;
+}
+
+.grid-container {
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template: 75px repeat(5, 1fr) / repeat(5, 20%);
+    background-color: #f7f7ff;
+}
+
+.navbar {
+    grid-column: 1 / 6;
+    grid-row: 1 / 2;
+}
+
+.content {
+    grid-row: 2 / span 6;
+    grid-column: 1 / span 6;
+}
