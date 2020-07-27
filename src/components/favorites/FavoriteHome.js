@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const FavoriteHome = () => {
     return (
-        <div className="content">
+        <div className="home-content">
             <div className="intro">
                 <h1> Welcome to Favorites</h1>
                 <h3>Socializing the way we socialize!</h3>
@@ -16,9 +16,9 @@ const FavoriteHome = () => {
                     From restaurants to the outdoors to nightlife!
                 </p>
             </div>
-            <div className="intro">
+            <div className="intro" id="home-bottom">
                 <h1>Get Started</h1>
-                <Link><h3>Login with <bold>Google</bold></h3></Link>
+                <Link><h3>Login with Google</h3></Link>
             </div>
         </div>
     )

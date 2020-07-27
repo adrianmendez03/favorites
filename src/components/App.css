@@ -15,6 +15,10 @@ body {
     margin: 0;
 }
 
+button {
+    cursor: pointer;
+}
+
 li, a {
     font-size: 16px;
     text-decoration: none;
@@ -49,6 +53,11 @@ a:visited {
     grid-column: 2 / span 3;
 
     margin-top: 5rem;
+}
+
+.home-content {
+    grid-row: 3 / span 5;
+    grid-column: 2 / span 3;
 }
 
 
@@ -89,11 +98,31 @@ a.nav_item:hover:before {
     visibility: visible;
     transform: scaleX(1.15);
 }
+
+button.google-button {
+    display:inline-block;
+    padding:0.35em 1.2em;
+    border:0.1em solid #474bb3;
+    margin:0 0.3em 0.3em 0;
+    border-radius:0.12em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-weight:300;
+    color: #474bb3;
+    text-align:center;
+    transition: all 0.2s;
+    background-color: #f7f7ff;
+}
+
+button.google-button:hover{
+    color:#ffffff;
+    background-color:#474bb3;
+}
 /* End of Navbar */
 
 /* Homepage */
 .intro {
-    margin: 2rem 0;
+    margin-bottom: 2rem;
     display: inline-block;
 }
 
@@ -104,13 +133,18 @@ a.nav_item:hover:before {
 }
 
 .intro-content {
-    background-color: #fafaff;
+    background-color: #474bb3;
     width: 65%;
     border-radius: 15px;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, .25);
+    color: #ffffff;
 }
 
 .intro-content p {
     padding: 1rem;
+}
+
+#home-bottom {
+    margin-top: 2rem;
 }
 /* End of Homepage */
