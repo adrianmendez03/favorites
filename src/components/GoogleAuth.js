@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { signIn, signOut } from '../actions';
+import { signIn, signOut, fetchUsers } from '../actions';
+import Axios from 'axios';
 
 class GoogleAuth extends React.Component {
 
@@ -17,9 +18,23 @@ class GoogleAuth extends React.Component {
         });
     }
 
+    createUser = (userId, userName) => {
+        const newUser = {
+            id: userId,
+            username: userName
+        };
+
+        console.log(newUser)
+
+        Axios.post('http://localhost:5000/users/add', newUser)
+            .then(res => console.log(res.data))
+    }
+
     onAuthChange = (isSignedIn) => {
         if (isSignedIn) {
             this.props.signIn(this.auth.currentUser.get().getId(), this.auth.currentUser.get().getBasicProfile().Cd);
+            this.createUser(this.auth.currentUser.get().getId(), this.auth.currentUser.get().getBasicProfile().Cd);
+            this.props.fetchUsers();
         } else {
             this.props.signOut();
         }
@@ -36,13 +51,13 @@ class GoogleAuth extends React.Component {
     renderAuthButton() {
         if(this.props.isSignedIn === false) {
             return (
-                <button onClick={this.onSignInClick} className="google-button">
+                <button onClick={this.onSignInClick} className="button">
                     Login with Google
                 </button>
             )
         } else if(this.props.isSignedIn) {
             return (
-                <button onClick={this.onSignOutClick} className="google-button">
+                <button onClick={this.onSignOutClick} className="button">
                     Sign Out
                 </button>
             )
@@ -60,4 +75,4 @@ const mapStateToProps = state => {
     return { isSignedIn: state.auth.isSignedIn };
 }
 
-export default connect(mapStateToProps, { signIn, signOut })(GoogleAuth);
+export default connect(mapStateToProps, { signIn, signOut, fetchUsers })(GoogleAuth);

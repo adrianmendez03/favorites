@@ -17,9 +17,9 @@ const App = () => {
                 <Navbar />
                 <br />
                 <Route path="/" exact component={FavoriteHome} />
-                <Route path="/view" exact component={FavoritesList} />
+                <Route path="/home" exact component={FavoritesList} />
                 <Route path="/edit/:id" component={EditFavorite} />
-                <Route path="/create" component={CreateFavorite} />
+                <Route path="/favorites/new" component={CreateFavorite} />
                 <Route path="/user" component={CreateUser} />
             </div>
         </Router>

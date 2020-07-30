@@ -24,10 +24,6 @@ li, a {
     text-decoration: none;
 }
 
-a:visited {
-    color: #000000;
-}
-
 .grid-container {
     height: 100vh;
     width: 100vw;
@@ -52,7 +48,7 @@ a:visited {
     grid-row: 2 / span 6;
     grid-column: 2 / span 3;
 
-    margin-top: 5rem;
+    margin-top: 7.5rem;
 }
 
 .home-content {
@@ -60,26 +56,48 @@ a:visited {
     grid-column: 2 / span 3;
 }
 
+button.button {
+    padding:0.35em 1.2em;
+    border:0.1em solid #474bb3;
+    margin:0 0.3em 0.3em 0;
+    border-radius:0.5em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-weight:300;
+    color: #474bb3;
+    text-align:center;
+    transition: all 0.2s;
+    background-color: #f7f7ff;
+}
+
+button.button:hover{
+    color:#ffffff;
+    background-color:#474bb3;
+}
 
 /* Navbar */
 .logo {
     cursor: pointer;
 }
 
-.nav_links {
+.nav-links {
     list-style: none;
 }
 
-.nav_links li {
+.nav-links li {
     display: inline-block;
     padding: 0px 20px;
 }
 
-a.nav_item {
+.nav-item {
+    color: #000000;
+}
+
+a.nav-item {
     position: relative;
 }
 
-a.nav_item:before {
+a.nav-item:before {
     content: "";
     position: absolute;
     width: 100%;
@@ -94,30 +112,11 @@ a.nav_item:before {
     border-radius: 50px;
 }
 
-a.nav_item:hover:before {
+a.nav-item:hover:before {
     visibility: visible;
     transform: scaleX(1.15);
 }
 
-button.google-button {
-    display:inline-block;
-    padding:0.35em 1.2em;
-    border:0.1em solid #474bb3;
-    margin:0 0.3em 0.3em 0;
-    border-radius:0.12em;
-    box-sizing: border-box;
-    text-decoration:none;
-    font-weight:300;
-    color: #474bb3;
-    text-align:center;
-    transition: all 0.2s;
-    background-color: #f7f7ff;
-}
-
-button.google-button:hover{
-    color:#ffffff;
-    background-color:#474bb3;
-}
 /* End of Navbar */
 
 /* Homepage */
@@ -126,7 +125,7 @@ button.google-button:hover{
     display: inline-block;
 }
 
-.intro h1 {
+h1 {
     margin: 1rem 0;
     border-bottom: 3px solid #474bb3;
     border-radius: 2px;
@@ -148,3 +147,55 @@ button.google-button:hover{
     margin-top: 2rem;
 }
 /* End of Homepage */
+
+/* Favorites List */
+.favorites-list {
+    margin-top: 2.5rem;
+}
+
+.list-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.list-content-container {
+    background-color: #474bb3;
+    width: 70%;
+    border-radius: 15px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, .25);
+    color: #ffffff;
+    margin-bottom: 1rem;
+}
+
+.list-content {
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.list-content h2 {
+    margin-bottom: .5rem;
+}
+
+.list-icon {
+    align-self: center;
+    font-size: 2rem;
+    color: #ffffff;
+}
+
+.admin-content {
+    list-style: none;
+    margin-right: 5%;
+}
+
+.admin-content li {
+    display: inline-block;
+    padding: 10px;
+}
+
+#delete:before {
+    background-color: #b32722 !important;
+}
+/* End of Favorites List */

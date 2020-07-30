@@ -7,12 +7,12 @@ const Navbar = () => {
     return (
         <div className="navbar">
             <div className="logo">
-                <Link to="/">Favorites</Link>
+                <Link to="/home">Favorites</Link>
             </div>
-            <ul className="nav_links">
-                <li><Link className="nav_item" to="/view">View Favorites</Link></li>
-                <li><Link className="nav_item" to="/edit/:id">Edit Favorites</Link></li>
-                <li><Link className="nav_item" to="/create">Create Favorites</Link></li>
+            <ul className="nav-links">
+                <li><Link className="nav-item" to="/home">Home</Link></li>
+                <li><Link className="nav-item" to="/edit/:id">Edit Favorites</Link></li>
+                <li><Link className="nav-item" to="/favorites/new">Create Favorites</Link></li>
             </ul>
             <GoogleAuth />
         </div>

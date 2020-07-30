@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import GoogleAuth from '../GoogleAuth';
 
 const FavoriteHome = () => {
     return (
@@ -18,7 +19,7 @@ const FavoriteHome = () => {
             </div>
             <div className="intro" id="home-bottom">
                 <h1>Get Started</h1>
-                <Link><h3>Login with Google</h3></Link>
+                <h3>Login to Google</h3>
             </div>
         </div>
     )
