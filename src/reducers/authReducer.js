@@ -16,7 +16,7 @@ export default (state = INITIAL_STATE, action) => {
                 ...state, 
                 isSignedIn: true, 
                 userId: action.payload.userId,
-                userName: action.payload.userName
+                userName: action.payload.userName,
             };
         case SIGN_OUT:
             // updates state when signing out to not carry data from prev user

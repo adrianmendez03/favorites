@@ -27,14 +27,16 @@ class GoogleAuth extends React.Component {
         console.log(newUser)
 
         Axios.post('http://localhost:5000/users/add', newUser)
-            .then(res => console.log(res.data))
+            .then(res => {
+                console.log(res.data);
+                this.props.fetchUsers();
+            })
     }
 
     onAuthChange = (isSignedIn) => {
         if (isSignedIn) {
             this.props.signIn(this.auth.currentUser.get().getId(), this.auth.currentUser.get().getBasicProfile().Cd);
             this.createUser(this.auth.currentUser.get().getId(), this.auth.currentUser.get().getBasicProfile().Cd);
-            this.props.fetchUsers();
         } else {
             this.props.signOut();
         }
