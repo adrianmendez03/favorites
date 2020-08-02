@@ -199,3 +199,55 @@ h1 {
     background-color: #b32722 !important;
 }
 /* End of Favorites List */
+
+/* Modal */
+.modal {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, .75);
+}
+
+.modal-content {
+    position: fixed;
+    width: 600px;
+    max-width: 100%;
+    height: 250px;
+    max-height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f7f7ff;
+    border-radius: 10px;
+    padding: 30px;
+}
+
+.modal-header {
+    border-bottom: 3px solid #474bb3;
+    border-radius: 2px;
+}
+
+.modal-text {
+    margin-top: 3rem;
+}
+
+.modal-buttons {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding: 30px;
+}
+
+#delete-button {
+    color: #b32722;
+    border-color: #b32722;
+}
+
+#delete-button:hover {
+    color: #ffffff;
+    background-color: #b32722;
+}
+/* End of Modal */

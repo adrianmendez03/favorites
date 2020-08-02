@@ -1,4 +1,5 @@
 import Axios from 'axios';
+import History from '../History';
 import { 
     SIGN_IN, 
     SIGN_OUT,

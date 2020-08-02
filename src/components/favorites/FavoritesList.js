@@ -15,7 +15,7 @@ class FavoritesList extends React.Component {
                 <ul className="admin-content">
                     <li><Link className="nav-item">Edit</Link></li>
                     <li>|</li>
-                    <li><Link className="nav-item" id="delete">Delete</Link></li>
+                    <li><Link to={`/favorites/delete/${this.props.currentUserId}`} className="nav-item" id="delete">Delete</Link></li>
                 </ul>
             )
         }
