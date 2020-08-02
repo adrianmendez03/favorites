@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const favoriteSchema = new Schema({
     username: { type: String, required: true },
-    name: { type: String, requires: true},
+    name: { type: String, required: true},
     location: { type: String, required: true }
 }, {
     timestamps: true,

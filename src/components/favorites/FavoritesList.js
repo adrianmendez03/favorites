@@ -51,7 +51,7 @@ class FavoritesList extends React.Component {
                             <div className="list-content-text">
                                 <h2>{title}</h2>
                             </div>
-                            <Link><i className="fa fa-angle-right list-icon" aria-hidden="true"></i></Link>
+                            <Link to={`/favorites/view/${user._id}`}><i className="fa fa-angle-right list-icon" aria-hidden="true"></i></Link>
                         </div>
                     </li>
                     {this.renderAdmin(user._id)}
