@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { signIn, fetchUsers } from '../../actions';
+import { signIn, fetchUsers, unfetchUser } from '../../actions';
 
 class FavoritesList extends React.Component {
 
     componentDidMount() {
         this.props.fetchUsers();
+        this.props.unfetchUser();
     }
 
     renderAdmin(userId) {
@@ -51,7 +52,7 @@ class FavoritesList extends React.Component {
                             <div className="list-content-text">
                                 <h2>{title}</h2>
                             </div>
-                            <Link to={`/favorites/view/${user._id}`}><i className="fa fa-angle-right list-icon" aria-hidden="true"></i></Link>
+                            <Link to={{ pathname: `/favorites/view/${user._id}`, state: { id: user._id} }}><i className="fa fa-angle-right list-icon" aria-hidden="true"></i></Link>
                         </div>
                     </li>
                     {this.renderAdmin(user._id)}
@@ -79,4 +80,4 @@ const mapStateToProps = state => {
     };
 }
 
-export default connect(mapStateToProps, { signIn, fetchUsers })(FavoritesList);
+export default connect(mapStateToProps, { signIn, fetchUsers, unfetchUser })(FavoritesList);

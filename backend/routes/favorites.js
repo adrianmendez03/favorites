@@ -8,14 +8,16 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/add').post((req, res) => {
-    const username = req.body.username;
-    const name = req.body.name;
-    const location = req.body.location;
+    const userId = req.body.favorites.userId;
+    const name = req.body.favorites.name;
+    const location = req.body.favorites.location;
+    const description = req.body.favorites.description;
 
     const newFavorite = new Favorite({
-        username, 
+        userId,
         name, 
-        location,
+        location, 
+        description,
     });
 
     newFavorite.save()

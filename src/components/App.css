@@ -13,11 +13,13 @@ html, body {
 
 body {
     margin: 0;
+    background-color: #f7f7ff;
 }
 
 button {
     cursor: pointer;
 }
+
 
 li, a {
     font-size: 16px;
@@ -29,7 +31,6 @@ li, a {
     width: 100vw;
     display: grid;
     grid-template: 75px repeat(5, 1fr) / 20% 1fr 1fr 1fr 20%;
-    background-color: #f7f7ff;
 }
 
 .navbar {
@@ -42,6 +43,8 @@ li, a {
     justify-content: space-between;
     align-items: center;
     padding: 30px 10%;
+
+    z-index: 1;
 }
 
 .content {
@@ -151,6 +154,7 @@ h1 {
 /* Favorites List */
 .favorites-list {
     margin-top: 2.5rem;
+    margin-bottom: 5rem;
 }
 
 .list-item {
@@ -175,7 +179,7 @@ h1 {
     justify-content: space-between;
 }
 
-.list-content h2 {
+.list-content-text h2, h3, h4 {
     margin-bottom: .5rem;
 }
 
@@ -251,3 +255,36 @@ h1 {
     background-color: #b32722;
 }
 /* End of Modal */
+
+/* Mapbox */
+.map-grid {
+    grid-row: 2 / 3;
+    grid-column: 1 / 6;
+    margin-right: 18px;
+    margin-left: 0px;
+}
+
+.map-container {
+    height: 400px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, .25);
+}
+
+.mapboxgl-ctrl-icon span {
+    margin-right: 3rem !important;
+}
+/* End of Mapbox */
+
+/* View Favorite */
+.user-content {
+    margin-top: 5rem;
+    grid-row: 3 / span 6;
+    grid-column: 2 / span 3;
+}
+
+#add-favorite-button {
+    height: 40px;
+    width: 150px;
+    margin-top: 1rem;
+    margin-left: 10rem;
+}
+/* End of View Favorite */

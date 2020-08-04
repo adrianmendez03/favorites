@@ -4,8 +4,9 @@ import {
     SIGN_IN, 
     SIGN_OUT,
     FETCH_USERS,
-    DELETE_USER,
-    FETCH_FAVORITES
+    FETCH_USER,
+    UNFETCH_USER,
+    DELETE_USER
 } from './types';
 
 export const signIn = (userId, userName) => {
@@ -27,6 +28,18 @@ export const fetchUsers = () => async dispatch => {
     dispatch({ type: FETCH_USERS, payload: response.data })
 }
 
+export const fetchUser = id => async dispatch => {
+    const response = await Axios.get(`http://localhost:5000/users/${id}`);
+
+    dispatch({ type: FETCH_USER, payload: response.data })
+}
+
+export const unfetchUser = () => {
+    return {
+        type: UNFETCH_USER
+    }
+}
+
 export const deleteUser = id => async dispatch => {
     await Axios.delete(`http://localhost:5000/users/${id}`);
 
@@ -34,8 +47,3 @@ export const deleteUser = id => async dispatch => {
     History.push('/');
 }
 
-export const fetchFavorites = id => async dispatch => {
-    const response = await Axios.get(`http://localhost:5000/favorites/${id}`);
-
-    dispatch({ type: FETCH_FAVORITES, payload: response.data })
-}

@@ -7,6 +7,12 @@ router.route('/').get((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
+router.route('/:id').get((req, res) => {
+    User.findById(req.params.id)
+        .then(user => res.json(user))
+        .catch(err => res.status(400).json('Error: ' + err));
+})
+
 router.route('/add').post((req, res) => {
     const id = req.body.id;
     const username = req.body.username;
@@ -18,6 +24,27 @@ router.route('/add').post((req, res) => {
     newUser.save()
         .then(() => res.json('User created!'))
         .catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.route('/update/:id').post((req, res) => {
+  const id = req.body.id;
+  const newFavorites = { 
+    name: req.body.name, 
+    location: req.body.location, 
+    description: req.body.description 
+  };
+  console.log(newFavorites)
+  User.findOneAndUpdate(
+     { _id: id }, 
+     { $push: { favorites: newFavorites  } },
+    function (error, success) {
+          if (error) {
+              res.status(400).json('Error: ', error);
+          } else {
+              res.json('Favorite Updated!');
+          }
+        }
+  )
 });
 
 router.route('/:id').delete((req, res) => {
