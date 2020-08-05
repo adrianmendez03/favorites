@@ -28,12 +28,13 @@ router.route('/add').post((req, res) => {
 
 router.route('/update/:id').post((req, res) => {
   const id = req.body.id;
-  const newFavorites = { 
+  const coord = [req.body.coord[0], req.body.coord[1]];
+  const newFavorites = {
+    coord: coord, 
     name: req.body.name, 
     location: req.body.location, 
     description: req.body.description 
   };
-  console.log(newFavorites)
   User.findOneAndUpdate(
      { _id: id }, 
      { $push: { favorites: newFavorites  } },

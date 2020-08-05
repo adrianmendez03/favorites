@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import mapboxgl from 'mapbox-gl/dist/mapbox-gl';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
@@ -11,8 +12,7 @@ class Mapbox extends React.Component {
         this.state = {
             lng: -90,
             lat: 38,
-            zoom: 3,
-            term: ''
+            zoom: 3
         }
     }
 
@@ -23,6 +23,14 @@ class Mapbox extends React.Component {
             center: [this.state.lng, this.state.lat],
             zoom: this.state.zoom
         });
+
+        this.map = map;
+
+        const favorites = this.props.favorites;
+
+        console.log(favorites);
+
+        this.renderMarkers(favorites, map);
 
         map.on('move', () => {
             this.setState({
@@ -57,6 +65,30 @@ class Mapbox extends React.Component {
 
     }
 
+    componentDidUpdate() {
+        const favorites = this.props.favorites;
+
+        this.renderMarkers(favorites, this.map)
+    }
+    
+    //work on this later 
+    
+    renderMarkers(favorites, map) {
+        if (favorites) {
+            return favorites.map(favorite => {
+                const name = favorite.name;
+                const location = favorite.location;
+                var popup = new mapboxgl.Popup({ offset: 35 }).setText(
+                    `${name} \n ${location}`
+                );
+                new mapboxgl.Marker({ color: '#474bb3'})
+                    .setLngLat([favorite.coord[0], favorite.coord[1]])
+                    .setPopup(popup)
+                    .addTo(map);
+            })
+        }
+    }
+
     renderMap() {
         return (
             <div className="map-grid">
@@ -70,4 +102,9 @@ class Mapbox extends React.Component {
     }
 }
 
-export default Mapbox;
+const mapStateToProps = state => {
+    return {
+        favorites: state.users.user.favorites
+    }
+}
+export default connect(mapStateToProps)(Mapbox);

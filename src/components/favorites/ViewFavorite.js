@@ -12,6 +12,7 @@ class ViewFavorite extends React.Component {
         super(props);
 
         this.state = {
+            coord: {},
             name: null,
             location: null, 
             description: null
@@ -24,6 +25,7 @@ class ViewFavorite extends React.Component {
 
     updateQuery = item => {
         this.setState({
+            coord: item.geometry.coordinates,
             name: item.text,
             location: item.place_name,
             description: item.properties.category
@@ -33,6 +35,7 @@ class ViewFavorite extends React.Component {
     onClick = (e) => {
         const newFavorite =  {
             id: this.props.signedInUserId,
+            coord: this.state.coord,
             name: this.state.name,
             location: this.state.location,
             description: this.state.description
@@ -45,6 +48,7 @@ class ViewFavorite extends React.Component {
                 console.log(res.data);
                 this.props.fetchUser(this.props.location.state.id);
                 this.setState({
+                    coord: {},
                     name: null,
                     location: null,
                     description: null
