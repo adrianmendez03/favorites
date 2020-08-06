@@ -14,9 +14,7 @@ class FavoritesList extends React.Component {
         if(userId === this.props.currentUserId) {
             return (
                 <ul className="admin-content">
-                    <li><Link className="nav-item">Edit</Link></li>
-                    <li>|</li>
-                    <li><Link to={`/favorites/delete/${this.props.currentUserId}`} className="nav-item" id="delete">Delete</Link></li>
+                    <li><button className="button nav-item" id="delete-button"><Link to={`/favorites/delete/${this.props.currentUserId}`}>Delete</Link></button></li>
                 </ul>
             )
         }

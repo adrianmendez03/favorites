@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { deleteUser } from '../../actions';
+import { deleteUser, signOut } from '../../actions';
 import Modal from '../Modal';
 import History from '../../History';
 
@@ -11,7 +11,10 @@ class DeleteFavorite extends React.Component {
         return (
             <div className="modal-buttons">
                 <Link to="/home"><button className="button">Cancel</button></Link>
-                <button onClick={this.props.deleteUser} className="button" id="delete-button">Delete</button>
+                <button onClick={() => {
+                    this.props.deleteUser(this.props.currentUserId)
+                        .then(() => this.props.signOut());
+                }} className="button" id="delete-button">Delete</button>
             </div>
         )
     }
@@ -43,4 +46,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { deleteUser })(DeleteFavorite);
+export default connect(mapStateToProps, { deleteUser, signOut })(DeleteFavorite);

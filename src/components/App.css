@@ -206,6 +206,7 @@ h1 {
 
 /* Modal */
 .modal {
+    z-index: 1;
     position: fixed;
     width: 100vw;
     height: 100vh;
@@ -251,6 +252,17 @@ h1 {
 }
 
 #delete-button:hover {
+    color: #ffffff;
+    background-color: #b32722;
+}
+
+#delete-button a {
+    color: #b32722;
+    transition: all 0.2s;
+    border-color: #b32722;
+}
+
+#delete-button:hover a {
     color: #ffffff;
     background-color: #b32722;
 }

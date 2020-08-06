@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import Axios from 'axios';
 import Mapbox from '../Mapbox';
 
+import FavoriteAdmin from './FavoriteAdmin';
 import { fetchUser } from '../../actions';
 
 class ViewFavorite extends React.Component {
@@ -12,6 +12,8 @@ class ViewFavorite extends React.Component {
         super(props);
 
         this.state = {
+            idOfUsersPage: null,
+            favoriteId: null,
             coord: {},
             name: null,
             location: null, 
@@ -21,6 +23,7 @@ class ViewFavorite extends React.Component {
 
     componentDidMount() {
         this.props.fetchUser(this.props.location.state.id);
+        this.setState({ idOfUsersPage: this.props.location.state.id });
     }
 
     updateQuery = item => {
@@ -67,17 +70,8 @@ class ViewFavorite extends React.Component {
         }
     }
 
-    renderAdmin(idOfUsersPage) {
-        if(idOfUsersPage === this.props.signedInUserId) {
-            return (
-                <ul className="admin-content">
-                    <li><button onClick={this.props.deleteUser} className="button nav-item" id="delete-button">Delete</button></li>
-                </ul>
-            )
-        }
-    }
-
     renderListItems() {
+        console.log(this.state.idOfUsersPage)
         return this.props.user.favorites.map(favorite => {
 
             const title =  `${favorite.name}`;
@@ -95,7 +89,7 @@ class ViewFavorite extends React.Component {
                             </div>
                         </div>
                     </li>
-                    {this.renderAdmin(this.props.location.state.id)}
+                    <FavoriteAdmin favoriteId={favorite._id} idOfUsersPage={this.state.idOfUsersPage}/>
                 </div>
             )
         })

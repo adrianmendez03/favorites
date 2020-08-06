@@ -46,4 +46,3 @@ export const deleteUser = id => async dispatch => {
     dispatch({ type: DELETE_USER, payload: id });
     History.push('/');
 }
-

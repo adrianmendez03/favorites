@@ -6,7 +6,7 @@ const favoriteSchema = new Schema({
     coord: { type: Array, required: true},
     name: { type: String, required: true },
     location: { type: String, required: true},
-    description: { type: String, required: true }
+    description: { type: String, required: true}
 }, {
     timestamps: true,
 });

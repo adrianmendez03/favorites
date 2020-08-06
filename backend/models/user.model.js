@@ -1,7 +1,15 @@
 const mongoose = require('mongoose');
-const favoriteSchema = require('./favorite.model').schema;
 
 const Schema = mongoose.Schema;
+
+const favoriteSchema = new Schema({
+    coord: { type: Array, required: true},
+    name: { type: String, required: true },
+    location: { type: String, required: true},
+    description: { type: String, required: true}
+}, {
+    timestamps: true,
+});
 
 const userSchema = new Schema({
     _id: String,
