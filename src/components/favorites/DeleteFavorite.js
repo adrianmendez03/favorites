@@ -7,17 +7,22 @@ import Modal from '../Modal';
 import History from '../../History';
 
 class DeleteFavorite extends React.Component {
+
+   // renders cancel and delete buttons
+    
     renderActions() {
         return (
             <div className="modal-buttons">
                 <Link to="/home"><button className="button">Cancel</button></Link>
                 <button onClick={() => {
-                    this.props.deleteUser(this.props.currentUserId)
-                        .then(() => this.props.signOut());
+                    this.props.deleteUser(this.props.currentUserId);
+                    this.props.signOut();
                 }} className="button" id="delete-button">Delete</button>
             </div>
         )
     }
+
+    // renders the modal box
 
     renderContent() {
         if(!this.props.currentUserId) {
@@ -26,6 +31,7 @@ class DeleteFavorite extends React.Component {
             return `Hey ${this.props.name}, are you sure you want to delete your Favorites?`
         }
     }
+
 
     render() {
         return (

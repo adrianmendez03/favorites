@@ -22,9 +22,12 @@ class ViewFavorite extends React.Component {
     }
 
     componentDidMount() {
+        // user id is passed from favorites list component or the navbar
         this.props.fetchUser(this.props.location.state.id);
         this.setState({ idOfUsersPage: this.props.location.state.id });
     }
+
+    // called when user clicks of location
 
     updateQuery = item => {
         this.setState({
@@ -34,6 +37,8 @@ class ViewFavorite extends React.Component {
             description: item.properties.category
         })
     }
+
+    // callback function that makes a post request to add favorite
 
     onClick = (e) => {
         const newFavorite =  {
@@ -60,6 +65,8 @@ class ViewFavorite extends React.Component {
             })
     }
 
+    // renders an Add Favorite button when signed && this.state.name exist
+
     renderAddFavorite(idOfUsersPage) {
         if(idOfUsersPage === this.props.signedInUserId) {
             if (this.state.name === null) {
@@ -69,6 +76,8 @@ class ViewFavorite extends React.Component {
             }
         }
     }
+
+    // maps through users favorites
 
     renderListItems() {
         console.log(this.state.idOfUsersPage)
@@ -112,7 +121,7 @@ class ViewFavorite extends React.Component {
                 return (
                     <div className="user-content">
                         <h1>{`${username}'s Favorites`}</h1>
-                        <h2>{`${username} doesn't have anything to share right now!`}</h2>
+                        <h2>{`${username} doesn't have anything to share right now . . .`}</h2>
                     </div>
                 )
             }

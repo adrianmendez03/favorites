@@ -6,6 +6,8 @@ import { fetchUser } from '../../actions';
 
 class FavoriteAdmin extends React.Component {
 
+    // when delete button is clcicked an the favorite object is sent with a delete property
+
     onClickDelete = (e) => {
 
         const deleteFavorite =  {
@@ -23,8 +25,9 @@ class FavoriteAdmin extends React.Component {
             
     }
 
+    // renders delete button next to favorite
+
     render() {
-        console.log(this.props)
         if(this.props.idOfUsersPage === this.props.signedInUserId) {
             return (
                 <ul className="admin-content">

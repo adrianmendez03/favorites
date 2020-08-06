@@ -25,8 +25,6 @@ router.route('/add').post((req, res) => {
     const id = req.body.id;
     const username = req.body.username;
 
-    console.log(id, username)
-
     const newUser = new User({username});
 
     newUser._id = id;
@@ -84,18 +82,6 @@ router.route('/update/:id').post((req, res) => {
    )
   }
 });
-
-// Path to Delete a user favorite
-// is passed in favoriteId = favoriteId
-
-router.route('/delete/:id').post((req, res) => {
-
-  const id = req.params.id;
-  const favoriteId = req.favoriteId;
-
-  console.log(req.body)
-});
-
 
 // Path to delete
 // is passed signed in user id 

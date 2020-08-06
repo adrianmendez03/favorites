@@ -6,11 +6,16 @@ import { signIn, fetchUsers, unfetchUser } from '../../actions';
 class FavoritesList extends React.Component {
 
     componentDidMount() {
+        // fetches list of users from redux store
         this.props.fetchUsers();
+        // remove user from redux store to not hold over information
         this.props.unfetchUser();
     }
 
+    // renders admin button if listed favorite is the current users favorite
+
     renderAdmin(userId) {
+        // user id is passed into React Router Link tag
         if(userId === this.props.currentUserId) {
             return (
                 <ul className="admin-content">
@@ -40,6 +45,8 @@ class FavoritesList extends React.Component {
         }
     }
 
+    // maps through list of users to render item
+
     renderListItems() {
         return this.props.users.map(user => {
             const title =  `${user.username}'s Favorites`;
@@ -60,6 +67,8 @@ class FavoritesList extends React.Component {
     }
 
     render() {
+
+        //prevents undefined error
         if (this.props.users) {
             return (
                 this.renderList()
