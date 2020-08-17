@@ -111,7 +111,7 @@ class ViewFavorite extends React.Component {
             if (this.props.user.favorites.length > 0) {
                 return (
                     <div className="user-content">
-                        <h1>{`${username}'s Favorites'`}</h1>
+                        <h1>{`${username}'s Favorites`}</h1>
                         <ul className="favorites-list">
                             {this.renderListItems()}
                         </ul>
