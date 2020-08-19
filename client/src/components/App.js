@@ -8,15 +8,14 @@ import ViewFavorite from './favorites/ViewFavorite';
 import DeleteFavorite from './favorites/DeleteFavorite';
 import History from '../History'
 
-import './App.css';
+import '../styles/styles.css'
 
 const App = () => {
     return (
         <Router history={History}>
+            <Route path="/" exact component={FavoriteHome} />
             <div className="grid-container">
-                <Navbar />
                 <br />
-                <Route path="/" exact component={FavoriteHome} />
                 <Route path="/home" exact component={FavoritesList} />
                 <Route path="/favorites/view/:id" component={ViewFavorite} />
                 <Route path="/favorites/delete/:id" component={DeleteFavorite} />

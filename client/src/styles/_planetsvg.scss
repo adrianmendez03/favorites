@@ -1,0 +1,17 @@
+#planet {
+    position: absolute;
+    top: 22%;
+    right: 13%;
+}
+
+#shadow {
+    animation: shadow 7s linear infinite;
+}
+
+@keyframes shadow {
+    0% {opacity: .05;}
+    25% {opacity: .25}
+    50% {opacity: .50}
+    75% {opacity: .25}
+    100% {opacity: .05;}
+}
