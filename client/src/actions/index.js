@@ -30,13 +30,13 @@ export const signOut = () => {
 }
 
 export const fetchUsers = () => async dispatch => {
-    const response = await Axios.get('http://localhost:5000/users');
+    const response = await Axios.get(`https://salty-tor-91484.herokuapp.com/users`);
 
     dispatch({ type: FETCH_USERS, payload: response.data })
 }
 
 export const fetchUser = id => async dispatch => {
-    const response = await Axios.get(`http://localhost:5000/users/${id}`);
+    const response = await Axios.get(`https://salty-tor-91484.herokuapp.com/users/${id}`);
 
     dispatch({ type: FETCH_USER, payload: response.data })
 }
@@ -48,14 +48,14 @@ export const unfetchUser = () => {
 }
 
 export const deleteUser = id => async dispatch => {
-    await Axios.delete(`http://localhost:5000/users/${id}`);
+    await Axios.delete(`https://salty-tor-91484.herokuapp.com/users/${id}`);
 
     dispatch({ type: DELETE_USER, payload: id });
     History.push('/');
 }
 
 export const fetchFavorites = () => async dispatch => {
-    const response = await Axios.get('http://localhost:5000/favorites');
+    const response = await Axios.get(`https://salty-tor-91484.herokuapp.com/favorites`);
 
     dispatch({ type: FETCH_FAVORITES, payload: response.data})
 }

@@ -18,11 +18,11 @@ class FavoritesList extends React.Component {
             id: this.props.userId,
             locationId: favoriteId,
         }
-        Axios.post(`http://localhost:5000/users/update/${this.props.userId}`, deleteFavorite)
+        Axios.post(`https://salty-tor-91484.herokuapp.com/users/update/${this.props.userId}`, deleteFavorite)
             .then(res => {
                 console.log(res.data);
                 this.props.fetchUser(this.props.userId);
-                Axios.post(`http://localhost:5000/favorites/update/${this.props.locationId}`, deleteFavorite)
+                Axios.post(`https://salty-tor-91484.herokuapp.com/favorites/update/${this.props.locationId}`, deleteFavorite)
                     .then(res => {
                         console.log(res.data);
                         this.props.fetchFavorites()

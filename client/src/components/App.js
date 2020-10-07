@@ -42,7 +42,7 @@ class App extends React.Component {
         };
 
     
-        Axios.post('http://localhost:5000/users/add', newUser)
+        Axios.post('https://salty-tor-91484.herokuapp.com/users/add', newUser)
             .then(res => {
                 this.props.fetchUser(this.props.id);
                 this.props.fetchUsers();

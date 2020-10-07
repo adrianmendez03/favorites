@@ -81,16 +81,16 @@ class FavoritesHome extends React.Component {
             description: this.state.description
         }
 
-        Axios.post(`http://localhost:5000/favorites/add`, newFavorite)
+        Axios.post(`https://salty-tor-91484.herokuapp.com/favorites/add`, newFavorite)
         .then(res => {
             console.log(res.data);
         });
-        Axios.post(`http://localhost:5000/users/update/${this.props.id}`, newFavorite)
+        Axios.post(`https://salty-tor-91484.herokuapp.com/users/update/${this.props.id}`, newFavorite)
         .then(res => {
             console.log(res.data);
             this.props.fetchUser(this.props.id);
             alert('Favorite added!');
-            Axios.post(`http://localhost:5000/favorites/update/${this.state.locationId}`, newFavorite)
+            Axios.post(`https://salty-tor-91484.herokuapp.com/favorites/update/${this.state.locationId}`, newFavorite)
             .then(res => {
                 console.log(res.data);
                 this.props.fetchFavorites();
