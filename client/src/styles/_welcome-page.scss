@@ -1,0 +1,104 @@
+@import './variables';
+
+@mixin fadeIn($delay) {
+    opacity: 0;
+    animation: slide 1s $delay ease-in;
+    animation-fill-mode: forwards;
+}
+
+.grid-welcome {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 70% 30%;
+    .grid-welcome-right {
+        background-color: $accentcolor;
+        .welcome-google {
+            height: 4rem;
+            display: grid;
+            margin: auto;
+            margin-top: 3rem;
+            align-content: center;
+            font-size: 1.25rem;
+        }
+    }
+    .grid-welcome-left {
+        background-color: $primarycolor;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .welcome-content {
+            list-style: none;
+            li {
+                margin: 3rem;
+                opacity: .75;
+            }
+        }
+    }
+}
+
+@media (max-width: 1000px) {
+    .grid-welcome {
+        grid-template-rows: 15% 85%;
+        grid-template-areas: 
+        "a a a"
+        "b b b";
+        .grid-welcome-left {
+            grid-area: b;
+            .welcome-content {
+                text-align: center;
+            }
+        }
+        .grid-welcome-right {
+            grid-area: a;
+            .welcome-google {
+                height: 3rem;
+                margin-right: 40px;
+                margin-top: 25px;
+            }
+        }
+    }
+}
+
+@media (max-width: 400px) {
+    .grid-welcome {
+        .grid-welcome-right {
+            .welcome-google {
+                height: 3rem;
+                margin: auto;
+                margin-top: 25px;
+            }
+        }
+    }
+}
+
+#text1 {
+    @include fadeIn(0s)
+}
+
+#text2 {
+    @include fadeIn(.5s)
+}
+
+#text3 {
+    @include fadeIn(1s)
+}
+
+@keyframes slide {
+    from {bottom: -50px;}
+    to {bottom: 0px;}
+
+    0% {opacity: 0;}
+    70% {opacity: .20;}
+    75% {opacity: .30;}
+    80% {opacity: .40;}
+    85% {opacity: .50;}
+    90% {opacity: .60;}
+    95% {opacity: .80;}
+    100% {opacity: 1;}
+}
+

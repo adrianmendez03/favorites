@@ -1,90 +1,155 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { signIn, fetchUsers, unfetchUser } from '../../actions';
+import Axios from 'axios';
+
+import { fetchUser, fetchFavorites } from '../../actions';
 
 class FavoritesList extends React.Component {
 
-    componentDidMount() {
-        // fetches list of users from redux store
-        this.props.fetchUsers();
-        // remove user from redux store to not hold over information
-        this.props.unfetchUser();
+    state = { 
+        displayList: false, 
+        displayModal: false,
+        activeId: null 
     }
 
-    // renders admin button if listed favorite is the current users favorite
+    onClickDelete = (favoriteId) => {
+        const deleteFavorite =  {
+            delete: true,
+            id: this.props.userId,
+            locationId: favoriteId,
+        }
+        Axios.post(`http://localhost:5000/users/update/${this.props.userId}`, deleteFavorite)
+            .then(res => {
+                console.log(res.data);
+                this.props.fetchUser(this.props.userId);
+                Axios.post(`http://localhost:5000/favorites/update/${this.props.locationId}`, deleteFavorite)
+                    .then(res => {
+                        console.log(res.data);
+                        this.props.fetchFavorites()
+                        alert("Favorite Deleted")
+                    })
+            })
+            
+    }
 
-    renderAdmin(userId) {
-        // user id is passed into React Router Link tag
-        if(userId === this.props.currentUserId) {
+    changeModalDisplay = () => {
+        this.setState({ displayModal: false})
+    }
+
+    changeListDisplayOnClick = () => {
+        if (this.state.displayList) {
+            this.setState({ displayList: false, activeId: null })
+        } else {
+            this.setState({ displayList: true })
+        }
+    }
+
+    renderDescriptionTags(description) {
+        var descArr = description.split(", ")
+        return descArr.map(tag => {
+            return <div className="favorites-list-item-tag" key={tag}>{tag}</div>
+        })
+    }
+    
+    renderListItemHeader(favorite) {
+        if (favorite._id === this.state.activeId) {
+            var start = favorite.location.indexOf(", ") + 1; 
+            var location = favorite.location.slice(start, favorite.location.length);
             return (
-                <ul className="admin-content">
-                    <li><button className="button nav-item" id="delete-button"><Link to={`/favorites/delete/${this.props.currentUserId}`}>Delete</Link></button></li>
-                </ul>
+                <div className="favorites-list-item-header">
+                    <div className="favorites-list-item-header-left">
+                        <h4>{favorite.name}</h4>
+                        <p>{location}</p>
+                    </div>
+                    <div className="favorites-list-item-header-right" onClick={() => this.onClickDelete(favorite._id)}>
+                        <h2>x</h2>
+                    </div>
+                </div>
+            )
+        } else {
+            return (
+                <div className="favorites-list-item-header">
+                    <div className="favorites-list-item-header-left">
+                        <h4>{favorite.name}</h4>
+                    </div>
+                </div>
             )
         }
+    }
+
+    renderListItemContent(favorite) {
+        if (favorite._id === this.state.activeId) {
+            return (
+                <div className="favorites-list-tag-container">
+                    {this.renderDescriptionTags(favorite.description)}
+                </div>
+            )   
+        } else return null;
+    }
+
+    renderListItems() {
+        const { favorites } = this.props;
+        var tabindex = 6;
+
+        if (this.state.displayList) {
+            if (favorites.length > 0) {
+                return this.props.favorites.map(favorite => {
+                    ++tabindex;
+                    return (
+                        <div 
+                            className="favorites-list-item" 
+                            key={favorite._id} 
+                            tabIndex={tabindex.toString()}
+                            onClick={() => {
+                                this.setState({ activeId: favorite._id });
+                                this.props.updateCenter(favorite.coord);
+                            }} 
+                        >   
+                            {this.renderListItemHeader(favorite)}
+                            {this.renderListItemContent(favorite)}
+                        </div>
+                    )
+                })
+            } else {
+                return (
+                    <div className="inactive favorites-list-item">
+                        You currently don't have any favorites.
+                    </div>
+                )
+            }
+        } 
+        else return null;
     }
 
     renderList() {
-        if (this.props.users.length > 0) {
-            return (
-                <div className="content">
-                    <h1>Check out Favorites!</h1>
-                    <ul className="favorites-list">
-                        {this.renderListItems()}
-                    </ul>
+        return ( 
+            <div 
+                className="favorites-list-container"
+            >
+                <div 
+                    className="favorites-list-header"
+                    onFocus={this.changeListDisplayOnClick}
+                    onClick={this.changeListDisplayOnClick}
+                    tabIndex="6"
+                >
+                    <h2>favorites</h2>
                 </div>
-            )
-        } else {
-            return (
-                <div className="content">
-                    <h1>Check out Favorites!</h1>
-                    <h2>Looks like you're the first! Log in to get started</h2>
+                <div className="favorites-list-body">
+                    {this.renderListItems()}
                 </div>
-            )
-        }
-    }
-
-    // maps through list of users to render item
-
-    renderListItems() {
-        return this.props.users.map(user => {
-            const title =  `${user.username}'s Favorites`;
-            return (
-                <div className="list-item" key={user._id}>
-                    <li className="list-content-container">
-                        <div className="list-content">
-                            <div className="list-content-text">
-                                <h2>{title}</h2>
-                            </div>
-                            <Link to={{ pathname: `/favorites/view/${user._id}`, state: { id: user._id} }}><i className="fa fa-angle-right list-icon" aria-hidden="true"></i></Link>
-                        </div>
-                    </li>
-                    {this.renderAdmin(user._id)}
-                </div>
-            )
-        })
+            </div>
+        )
     }
 
     render() {
-
-        //prevents undefined error
-        if (this.props.users) {
-            return (
-                this.renderList()
-            )
-        } else {
-            return <div className="content"><h1>Loading . . .</h1></div>
-        }
+        return this.renderList()
     }
 }
 
 const mapStateToProps = state => {
-    return { 
-        isSignedIn: state.auth.isSignedIn,
-        currentUserId: state.auth.userId,
-        users: state.users.users
-    };
+    return {
+        userId: state.auth.userId
+    }
 }
 
-export default connect(mapStateToProps, { signIn, fetchUsers, unfetchUser })(FavoritesList);
+export default connect(mapStateToProps, { fetchUser, fetchFavorites })(FavoritesList);

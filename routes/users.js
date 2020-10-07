@@ -1,6 +1,8 @@
+const ObjectId = require('mongodb').ObjectID;
 const router = require('express').Router();
 let User = require('../models/user.model');
 const { isValidObjectId } = require('mongoose');
+const mongooseUniqueValidator = require('mongoose-unique-validator');
 
 // Path to get Users
 
@@ -14,8 +16,14 @@ router.route('/').get((req, res) => {
 
 router.route('/:id').get((req, res) => {
     User.findById(req.params.id)
-        .then(user => res.json(user))
-        .catch(err => res.status(400).json('Error: ' + err));
+        .populate('favorites')
+        .exec()
+        .then(user => {
+            res.json(user)
+        })
+        .catch(err => {
+            res.status(400).json('Error: ' + err)
+        }) 
 })
 
 // Path to Add a User
@@ -45,43 +53,36 @@ router.route('/add').post((req, res) => {
 // }
 
 router.route('/update/:id').post((req, res) => {
-  const id = req.body.id;
 
-  if(req.body.delete) {
-    User.findOneAndUpdate(
-      { _id: id }, 
-      { $pull: { favorites: { _id: req.body.favoriteId} } },
-     function (error, success) {
-           if (error) {
-               res.status(400).json('Error: ', error);
-           } else {
-               res.json('Favorite Updated!');
+   const id = req.body.id;
+   const favId = req.body.locationId;
+
+    if(req.body.delete) {
+      User.findOneAndUpdate(
+        { _id: id }, 
+        { $pull: { favorites: favId } },
+       function (error, success) {
+             if (error) {
+                 res.status(400).json('Error: ', error);
+             } else {
+                 res.json('Favorite deleted');
+             }
            }
-         }
-   )
-  } else {
-
-    const coord = [req.body.coord[0], req.body.coord[1]]
-    const newFavorites = {
-      coord: coord,
-      name: req.body.name, 
-      location: req.body.location, 
-      description: req.body.description 
-    };
-
-    User.findOneAndUpdate(
-      { _id: id }, 
-      { $push: { favorites: newFavorites  } },
-     function (error, success) {
-           if (error) {
-               res.status(400).json('Error: ', error);
-           } else {
-               res.json('Favorite Updated!');
+     )
+    } else {
+      User.findOneAndUpdate(
+        { _id: id }, 
+        { $push: { favorites: favId } },
+       function (error, success) {
+             if (error) {
+                 res.status(400).json(error);
+             } else {
+                 res.json('Favorite added');
+             }
            }
-         }
-   )
-  }
-});
+     )
+    }
+ });
 
 // Path to delete
 // is passed signed in user id 

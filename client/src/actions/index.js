@@ -6,17 +6,24 @@ import {
     FETCH_USERS,
     FETCH_USER,
     UNFETCH_USER,
-    DELETE_USER
+    DELETE_USER,
+    FETCH_FAVORITES
 } from './types';
 
-export const signIn = (userId, userName) => {
+export const signIn = (userId, userName, profilePicture) => {
+
+    History.push('/home');
+
     return {
         type: SIGN_IN,
-        payload: { userId, userName }
+        payload: { userId, userName, profilePicture }
     };
 };
 
 export const signOut = () => {
+
+    History.push('/');
+
     return {
         type: SIGN_OUT
     }
@@ -45,4 +52,10 @@ export const deleteUser = id => async dispatch => {
 
     dispatch({ type: DELETE_USER, payload: id });
     History.push('/');
+}
+
+export const fetchFavorites = () => async dispatch => {
+    const response = await Axios.get('http://localhost:5000/favorites');
+
+    dispatch({ type: FETCH_FAVORITES, payload: response.data})
 }

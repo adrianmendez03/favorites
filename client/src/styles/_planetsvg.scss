@@ -1,7 +1,7 @@
 #planet {
     position: absolute;
     top: 22%;
-    right: 13%;
+    right: 15%;
 }
 
 #shadow {
@@ -14,4 +14,27 @@
     50% {opacity: .50}
     75% {opacity: .25}
     100% {opacity: .05;}
+}
+
+@media (max-width: 1700px) {
+    #planet {
+        height: 500px;
+        width: 500px;
+        right: 150px;
+    }
+}
+
+@media (max-width: 1250px) {
+    #planet {
+        height: 375px;
+        width: 375px;
+        top: 300px;
+        right: 100px;
+    }
+}
+
+@media (max-width: 1000px) {
+    #planet {
+        display: none;
+    }
 }

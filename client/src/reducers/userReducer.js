@@ -9,11 +9,11 @@ import {
 export default (state = {}, action) => {
     switch(action.type) {
         case FETCH_USERS: 
-            return {...state, users: action.payload }
+            return { ...state, users: action.payload }
         case FETCH_USER: 
-            return {...state, user: action.payload }
+            return { ...state, user: action.payload }
         case UNFETCH_USER:
-            return { ... state, user: {} }
+            return { ...state, user: {} }
         case DELETE_USER:
             return _.omit(state, action.payload)
         default:

@@ -1,7 +1,7 @@
-@mixin buttonConfig($primary-color, $bg-color, $bg-hover-color) {
+@mixin buttonConfig($primary-color, $border-color, $bg-color, $bg-hover-color) {
     cursor: pointer;
     padding:0.35em 1.2em;
-    border:0.1em solid $primary-color;
+    border:0.1em solid $border-color;
     margin:0 0.3em 0.3em 0;
     border-radius:0.5em;
     box-sizing: border-box;
@@ -9,7 +9,7 @@
     font-weight:300;
     color: $primary-color;
     text-align:center;
-    transition: all 0.2s;
+    transition: all 0.3s;
     background-color: $bg-color;
     &:hover {
         background-color: $bg-hover-color;
@@ -17,5 +17,5 @@
 }
 
 button {
-    @include buttonConfig(#474bb3, #f7f7ff, rgba(245, 245, 255, 0.6));
+    @include buttonConfig(#474bb3, #474bb3, #f7f7ff, rgba(245, 245, 255, 0.6));
 }
