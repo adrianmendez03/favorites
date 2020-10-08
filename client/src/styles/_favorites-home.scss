@@ -1,0 +1,163 @@
+@import './variables';
+@import './button';
+
+@mixin sidebar-item {
+    background-color: $primarycolor;
+    cursor: pointer;
+    width: 275px;
+    height: 60px;
+    border-radius: 75px;
+    transition: all .3s;
+    &:hover {
+        background-color: rgba(71, 75, 179, .6);
+        color: white;
+    }
+}
+
+.grid-home {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 25% 75%;
+    background-color: $primarycolor;
+    .grid-home-sidebar {
+        box-shadow: 10px 0px 25px rgba(0, 0, 0, .2);
+        z-index: 1;
+        .sidebar-list {
+            height: 60%;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            .sidebar-list-item {
+                margin: 25px;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+                padding: 15px;
+                @include sidebar-item;
+            }
+        }
+        #account-button {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
+            align-items: center;
+            margin-left: auto;
+            margin-right: auto;
+            @include sidebar-item;
+            img {
+                height: 50px;
+                width: 50px;
+                border-radius: 25px;
+                margin-left: 7px;
+            }
+            h3 {
+                width: 70%;
+            }
+        }
+    }
+    .grid-home-content {
+        .map-container {
+            height: 100vh;
+            width: 100%;
+            .mapboxgl-canvas {
+                height: 100%;
+            }
+        }
+        .grid-home-content-menu-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: fixed;
+            bottom: 100px !important;
+            right: 50px !important;
+            #add-favorite-button {
+                width: 100%;
+                height: 40px;
+                margin-bottom: 10px;
+                box-shadow: 1px 1px 15px 2px rgba(0, 0, 0, .4);
+            }
+            .favorites-list-container {
+                box-shadow: 1px 1px 15px 2px rgba(0, 0, 0, .4);
+                background-color: $accentcolor;
+                color: $primarycolor;
+                cursor: pointer;
+                width: 300px;
+                height: auto;
+                max-height: 400px;
+                border-radius: 20px;
+                transition: all .3s;
+                overflow: auto;
+                .favorites-list-header {
+                    display: block;
+                    text-align: center;
+                    padding-top: 18px;
+                    padding-bottom: 18px;
+                    height: 60px;
+                    transition: all .3s;
+                    box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, .1);
+                    &:hover {
+                        background-color: #3c4099;
+                    }
+                }
+                .favorites-list-body {
+                    .inactive {
+                        cursor: default !important;
+                    }
+                    .favorites-list-item {
+                        display: flex;
+                        flex-direction: column;
+                        padding: 20px 15px 15px 15px;
+                        height: auto;
+                        min-height: 60px;
+                        box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, .1);
+                        &:hover {
+                            background-color: #3c4099;
+                        }
+                        .favorites-list-item-header {
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: space-between;
+                            .favorites-list-item-header-left {
+                                display: flex;
+                                flex-direction: column;
+                                width: 75%;
+                                p {
+                                    padding-top: 5px;
+                                    font-size: 14px;
+                                }
+                            }
+                            .favorites-list-item-header-right {
+                                align-items: center;
+                            }
+                        }
+                        .favorites-list-tag-container {
+                            display: flex;
+                            flex-direction: row;
+                            flex-wrap: wrap;
+                            margin-top: 15px;
+                            .favorites-list-item-tag {
+                                cursor: default;
+                                width: fit-content;
+                                font-size: 13px;
+                                background-color: inherit;
+                                color: $primarycolor;
+                                border: 1px solid $primarycolor;
+                                margin: 5px;
+                                padding: 5px;
+                                border-radius: 10px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

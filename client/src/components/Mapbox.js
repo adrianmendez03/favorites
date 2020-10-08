@@ -4,31 +4,28 @@ import mapboxgl from 'mapbox-gl/dist/mapbox-gl';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiYWRyaWFubWVuZGV6MDMiLCJhIjoiY2tjemRvbWVtMGl0ZTJ0cWliNGI2MGs1NCJ9.qNpxejX7dRZmqHRtlwIbFg';
+mapboxgl.accessToken = `${process.env.REACT_APP_MAPBOX_KEY}`;
 
 class Mapbox extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            lng: -90,
-            lat: 38,
-            zoom: 3
-        }
+
+    state = {
+        center: [-90, 38],
+        zoom: 3.25
     }
 
     componentDidMount() {
         const map = new mapboxgl.Map({
             container: this.mapContainer,
             style: 'mapbox://styles/adrianmendez03/ckddwuvck4igk1jt7ago8v0kz',
-            center: [this.state.lng, this.state.lat],
+            center: this.state.center,
             zoom: this.state.zoom
         });
 
         this.map = map;
 
-        const favorites = this.props.favorites;
+        this.props.fetchMap(map);
 
-        console.log(favorites);
+        const favorites = this.props.user.favorites;
 
         this.renderMarkers(favorites, map);
 
@@ -40,6 +37,17 @@ class Mapbox extends React.Component {
             });
         });
 
+        const geocoder = new MapboxGeocoder({
+            accessToken: mapboxgl.accessToken,
+            mapboxgl: mapboxgl,
+            getItemValue: item => {
+                this.props.updateQuery(item);
+                return item.place_name;
+            }
+        });
+
+        map.addControl(geocoder);
+
         map.addControl(
             new mapboxgl.GeolocateControl({
                 positionOptions: {
@@ -49,41 +57,19 @@ class Mapbox extends React.Component {
             }),
         );
 
-        
-        const geocoder = new MapboxGeocoder({
-            accessToken: mapboxgl.accessToken,
-            mapboxgl: mapboxgl,
-            getItemValue: item => {
-                this.props.callBack(item);
-                return item.place_name;
-            }
-        });
-
-        map.addControl(geocoder);
-
-        console.log(geocoder.getItemValue)
-
     }
 
     componentDidUpdate() {
-        const favorites = this.props.favorites;
+        const user = this.props.user;
 
-        this.renderMarkers(favorites, this.map)
+        this.renderMarkers(user.favorites, this.map)
     }
-    
-    //work on this later 
     
     renderMarkers(favorites, map) {
         if (favorites) {
             return favorites.map(favorite => {
-                const name = favorite.name;
-                const location = favorite.location;
-                var popup = new mapboxgl.Popup({ offset: 35 }).setText(
-                    `${name} \n ${location}`
-                );
                 new mapboxgl.Marker({ color: '#474bb3'})
                     .setLngLat([favorite.coord[0], favorite.coord[1]])
-                    .setPopup(popup)
                     .addTo(map);
             })
         }
@@ -91,9 +77,7 @@ class Mapbox extends React.Component {
 
     renderMap() {
         return (
-            <div className="map-grid">
-                <div ref={el => this.mapContainer = el} className="map-container"/>
-            </div>
+            <div ref={el => this.mapContainer = el} className="map-container"/>
         )
     }
 
@@ -104,7 +88,8 @@ class Mapbox extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        favorites: state.users.user.favorites
+        user: state.users.user
     }
 }
+
 export default connect(mapStateToProps)(Mapbox);

@@ -1,0 +1,40 @@
+@import './variables';
+
+@import './explore';
+@import './favorites-modal';
+@import './loading-favorites';
+@import './welcome-page';
+@import './favorites-home';
+@import './home-auth';
+@import './mapbox';
+@import './button';
+@import './planetsvg';
+@import './text-logo';
+@import './logo';
+
+* {
+    font-family: 'Manjari', sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    html {
+        overflow-x: hidden;
+        body {
+            margin: 0;
+            border: 1px solid transparent;
+        }
+    }
+}
+
+div::-webkit-scrollbar {
+    width: 10px;               /* width of the entire scrollbar */
+  }
+  div::-webkit-scrollbar-track {
+    background: #474bb3;        /* color of the tracking area */
+    border-radius: 20px;
+  }
+  div::-webkit-scrollbar-thumb {
+    background-color: rgba(247, 247, 255, .8);    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 2px solid #474bb3;  /* creates padding around scroll thumb */
+  }

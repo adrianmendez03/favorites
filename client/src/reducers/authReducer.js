@@ -17,6 +17,7 @@ export default (state = INITIAL_STATE, action) => {
                 isSignedIn: true, 
                 userId: action.payload.userId,
                 userName: action.payload.userName,
+                profilePicture: action.payload.profilePicture
             };
         case SIGN_OUT:
             // updates state when signing out to not carry data from prev user
@@ -24,7 +25,8 @@ export default (state = INITIAL_STATE, action) => {
                 ...state, 
                 isSignedIn: false,
                 userId: null,
-                userName: null
+                userName: null,
+                profilePicture: null
             }
         default:
             return state;
